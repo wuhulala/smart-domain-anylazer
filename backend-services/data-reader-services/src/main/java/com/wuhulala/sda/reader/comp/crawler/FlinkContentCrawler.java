@@ -6,8 +6,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.wuhulala.sda.reader.util.PageUtils;
-import com.wuhulala.sda.reader.util.ThreadExecutorUtils;
+import com.wuhulala.sda.model.DomainContent;
+import com.wuhulala.sda.utils.ThreadExecutorUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -32,7 +32,7 @@ public class FlinkContentCrawler extends DomainBreadthCrawler {
     private String pageRegex;
     // json/xml
     private String seedType;
-    private CrawlerDataWriter writer;
+    private DomainContentWriter writer;
     private ThreadPoolExecutor threadPoolExecutor;
 
 
@@ -76,7 +76,7 @@ public class FlinkContentCrawler extends DomainBreadthCrawler {
          */
 //        setResumable(true);
 
-        writer = new MongoDbCrawlerDataWriter();
+        writer = new MongoDbDomainContentWriter();
         writer.init();
 
         threadPoolExecutor = ThreadExecutorUtils.newThreadPoolExecutor("crawler-data-saver-", 1, 10);
@@ -140,39 +140,19 @@ public class FlinkContentCrawler extends DomainBreadthCrawler {
         if (page.select("time.published").first() != null) {
             pubDate = page.select("time.published").first().attr("datetime");
         };
-        writer.write(CrawlerData.builder()
-                .domain(getDomain())
+        writer.write(DomainContent.builder()
+                .domainId("1")
+                .domainName(getDomain())
+                .readerType("crawler")
                 .title(title)
                 .pubDate(pubDate)
                 .content(content)
+                .sourceType(page.contentType())
                 .author(author)
-                .url(page.url())
+                .origin(page.url())
                 .gmtCreate(new Date())
+                .creator("FlinkContentCrawler")
                 .build());
-    }
-
-    /**
-     * webcollector自带获取html driver测试
-     *
-     * @param page
-     */
-    protected void handleByHtmlUnitDriver(Page page) {
-        /*HtmlUnitDriver可以抽取JS生成的数据*/
-        HtmlUnitDriver driver = PageUtils.getDriver(page, BrowserVersion.CHROME);
-      /*HtmlUnitDriver也可以像Jsoup一样用CSS SELECTOR抽取数据
-        关于HtmlUnitDriver的文档请查阅selenium相关文档*/
-        print(driver);
-    }
-
-    /**
-     * phantomjs driver测试
-     *
-     * @param page
-     */
-    protected void handleByPhantomJsDriver(Page page) {
-        WebDriver driver = PageUtils.getDriver(page);
-        print(driver);
-        driver.quit();
     }
 
     protected void print(WebDriver driver) {
@@ -198,6 +178,7 @@ public class FlinkContentCrawler extends DomainBreadthCrawler {
     public static void main(String[] args) throws Exception {
         FlinkContentCrawler commonContentCrawler = new FlinkContentCrawler("https://ververica.cn/wp-admin/admin-ajax.php?action=my_ajax_sort_search", "https://ververica.cn/developers/.*", "crawler", true);
         commonContentCrawler.start(3);
+
     }
 
 }

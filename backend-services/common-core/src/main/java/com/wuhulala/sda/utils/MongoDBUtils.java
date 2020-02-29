@@ -1,4 +1,4 @@
-package com.wuhulala.sda.reader.util;
+package com.wuhulala.sda.utils;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;

@@ -1,4 +1,4 @@
-package com.wuhulala.sda.reader.util;
+package com.wuhulala.sda.utils;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
