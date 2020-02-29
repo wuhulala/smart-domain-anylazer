@@ -11,5 +11,12 @@
 
     <artifactId>data-reader-services</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.edu.hfut.dmic.webcollector</groupId>
+            <artifactId>WebCollector</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
