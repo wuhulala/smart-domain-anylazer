@@ -1,7 +1,9 @@
 <template>
     <a-layout id="components-layout-demo-top" class="layout">
         <a-layout-header>
-            <div class="logo">SDA</div>
+            <div class="logo">
+                <span>Smart-Domain-Analyser</span>
+            </div>
             <a-menu
                     theme="dark"
                     mode="horizontal"
@@ -12,7 +14,7 @@
                     <router-link to="/">主页</router-link>
                 </a-menu-item>
                 <a-menu-item key="2">
-                    <router-link to="/domain-list">领域分析</router-link>
+                    <router-link to="/domain-list">领域管理</router-link>
                 </a-menu-item>
                 <a-menu-item key="3">
                     <router-link to="/me">个人信息</router-link>
@@ -41,11 +43,20 @@
 </template>
 <style>
     #components-layout-demo-top .logo {
-        width: 120px;
+        width: 220px;
         height: 31px;
         background: rgba(243, 165, 89, 0.2);
         margin: 16px 24px 16px 0;
         float: left;
+    }
+
+    #components-layout-demo-top .logo span {
+        position: relative;
+        color: white;
+        font-size: 16px;
+        top: -18px;
+        left: 12px;
+        font-weight: bolder;
     }
 </style>
 

@@ -24,7 +24,7 @@ const routes = [
       {
         name: 'DomainList',
         path: '/domain-list',
-        breadcrumbName: '领域分析',
+        breadcrumbName: '领域管理',
         component: DomainList
       },
       {
