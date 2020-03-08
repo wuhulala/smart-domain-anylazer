@@ -73,7 +73,7 @@
     },
     mounted() {
 
-      this.routes = [router.options.routes];
+      // this.routes = [router.options.routes];
 
     }
   }

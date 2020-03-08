@@ -3,13 +3,15 @@
         <a-layout-sider width="200" style="background: #fff">
             <a-menu
                     mode="inline"
-                    :defaultSelectedKeys="['1']"
+                    :defaultSelectedKeys="['0']"
                     :defaultOpenKeys="['sub1']"
                     style="height: 100%"
             >
                 <a-sub-menu key="sub1">
                     <span slot="title"><a-icon type="user"/>领域元数据</span>
-                    <a-menu-item key="0">领域概览</a-menu-item>
+                    <a-menu-item key="0">
+                        <router-link to="/domain-list">领域概览</router-link>
+                    </a-menu-item>
                     <a-menu-item key="1">领域管理</a-menu-item>
                     <a-menu-item key="2">领域资料管理</a-menu-item>
                     <a-menu-item key="3">领域分组管理</a-menu-item>
@@ -24,7 +26,7 @@
             </a-menu>
         </a-layout-sider>
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-            Content
+            <router-view></router-view>
         </a-layout-content>
     </a-layout>
 </template>

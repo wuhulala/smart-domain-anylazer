@@ -5,6 +5,7 @@ import MainContent from '../components/layout/MainContent.vue'
 
 import Home from '../components/views/Home'
 import DomainList from '../components/views/DomainList'
+import DomainOverview from '../components/views/domain/DomainOverview'
 import Me from '../components/views/Me'
 
 Vue.use(VueRouter);
@@ -25,7 +26,15 @@ const routes = [
         name: 'DomainList',
         path: '/domain-list',
         breadcrumbName: '领域管理',
-        component: DomainList
+        component: DomainList,
+        children: [
+          {
+            name: 'DomainOverview',
+            path: '/',
+            breadcrumbName: '领域总览',
+            component: DomainOverview
+          }
+        ]
       },
       {
         name: 'Me',
