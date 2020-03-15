@@ -33,6 +33,7 @@
         <module>data-aggreate-api</module>
         <module>data-aggreate-services</module>
         <module>server</module>
+        <module>common-services</module>
     </modules>
 
     <dependencies>
@@ -47,7 +48,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>2.2.2.RELEASE</version>
             </dependency>
 
             <dependency>
@@ -114,6 +115,20 @@
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-hadoop-compatibility_2.11</artifactId>
                 <version>${flink.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.wuhulala</groupId>
+                <artifactId>common-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--mybatis-plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.1</version>
             </dependency>
 
 
