@@ -14,7 +14,7 @@
                     <router-link to="/">主页</router-link>
                 </a-menu-item>
                 <a-menu-item key="2">
-                    <router-link to="/domain-list">领域管理</router-link>
+                    <router-link to="/domain">领域管理</router-link>
                 </a-menu-item>
                 <a-menu-item key="3">
                     <router-link to="/me">个人信息</router-link>

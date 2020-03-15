@@ -4,9 +4,11 @@ import VueRouter from 'vue-router'
 import MainContent from '../components/layout/MainContent.vue'
 
 import Home from '../components/views/Home'
-import DomainList from '../components/views/DomainList'
+import Domain from '../components/views/Domain'
 import DomainOverview from '../components/views/domain/DomainOverview'
 import Me from '../components/views/Me'
+import DomainManage from "../components/views/domain/DomainManage";
+import DomainDetail from "../components/views/domain/detail/DomainDetail";
 
 Vue.use(VueRouter);
 
@@ -23,16 +25,28 @@ const routes = [
         component: Home
       },
       {
-        name: 'DomainList',
-        path: '/domain-list',
+        name: 'Domain',
+        path: '/domain',
         breadcrumbName: '领域管理',
-        component: DomainList,
+        component: Domain,
         children: [
           {
             name: 'DomainOverview',
-            path: '/',
+            path: '',
             breadcrumbName: '领域总览',
             component: DomainOverview
+          },
+          {
+            name: 'DomainManage',
+            path: 'manage',
+            breadcrumbName: '领域管理',
+            component: DomainManage
+          },
+          {
+            name: 'DomainDetail',
+            path: 'detail/:id',
+            breadcrumbName: '领域详情',
+            component: DomainDetail
           }
         ]
       },

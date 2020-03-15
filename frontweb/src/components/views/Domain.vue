@@ -8,11 +8,14 @@
                     style="height: 100%"
             >
                 <a-sub-menu key="sub1">
-                    <span slot="title"><a-icon type="user"/>领域元数据</span>
+                    <span slot="title">
+                        <a-icon type="user"/>领域元数据</span>
                     <a-menu-item key="0">
-                        <router-link to="/domain-list">领域概览</router-link>
+                        <router-link to="/domain">领域概览</router-link>
                     </a-menu-item>
-                    <a-menu-item key="1">领域管理</a-menu-item>
+                    <a-menu-item key="1">
+                        <router-link to="/domain/manage">领域管理</router-link>
+                    </a-menu-item>
                     <a-menu-item key="2">领域资料管理</a-menu-item>
                     <a-menu-item key="3">领域分组管理</a-menu-item>
                 </a-sub-menu>
@@ -32,9 +35,9 @@
 </template>
 
 <script>
-  export default {
-    name: "DomainList"
-  }
+    export default {
+        name: "Domain"
+    }
 </script>
 
 <style scoped>
