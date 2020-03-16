@@ -1,2 +1,13 @@
 server:
   port: 9001
+
+rest:
+  service:
+    scan:
+      path: com.wuhulala.sda.service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
