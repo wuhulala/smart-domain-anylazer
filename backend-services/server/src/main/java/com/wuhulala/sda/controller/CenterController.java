@@ -1,4 +1,4 @@
-package org.wuhulala.sda.controller;
+package com.wuhulala.sda.controller;
 
 import com.wuhulala.rest.controller.AbstractRestProxyController;
 import org.springframework.web.bind.annotation.RestController;
