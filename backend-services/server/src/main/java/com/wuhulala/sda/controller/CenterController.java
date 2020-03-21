@@ -1,5 +1,6 @@
 package com.wuhulala.sda.controller;
 
+import com.wuhulala.rest.base.BaseResult;
 import com.wuhulala.rest.controller.AbstractRestProxyController;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CenterController extends AbstractRestProxyController {
 
-//    @Override
-//    public Object handlerResult(BaseResult baseResult) {
-//        return super.handlerResult(baseResult);
-//    }
+    @Override
+    public Object handlerResult(BaseResult baseResult) {
+        return baseResult.getData();
+    }
 }

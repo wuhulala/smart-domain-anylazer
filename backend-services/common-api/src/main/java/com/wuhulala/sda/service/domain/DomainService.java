@@ -22,6 +22,7 @@ public interface DomainService {
     @RestService(name="根据parentId获取group",path = "group/find_domain_group_by_parent")
     DomainGroupResp findDomainGroupByParent(DomainGroupReq req);
 
+    @RestService(name="根据group获取对应的领域",path = "/find_domain_by_group")
     DomainResp findDomainByGroup(DomainReq req);
 
     @RestService(name="新增领域",path = "add")
