@@ -31,6 +31,17 @@ module.exports = {
     }
   },
 
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'assets': '@/assets',
+        'api': '@/api',
+        'common': '@/common',
+        'components': '@/components',
+        'views': '@/views'
+      }
+    }
+  },
 
   /* webpack-dev-server 相关配置 */
   devServer: {
@@ -43,9 +54,9 @@ module.exports = {
     hotOnly: false,
     /* 使用代理 */
     proxy: {
-      '/api': {
+      '/': {
         /* 目标代理服务器地址 */
-        target: 'http://47.100.47.3/',
+        target: 'http://localhost:9001/',
         /* 允许跨域 */
         changeOrigin: true,
       },

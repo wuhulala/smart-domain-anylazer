@@ -6,6 +6,10 @@ import VueRouter from 'vue-router'
 import router from './router'
 import echarts from 'echarts'
 import wordCloud from 'echarts-wordcloud'
+import axios from 'axios';
+Vue.prototype.$axios = axios;
+import QS from 'qs'
+Vue.prototype.qs = QS;
 Vue.prototype.$echarts = echarts
 
 

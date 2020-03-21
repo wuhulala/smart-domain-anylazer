@@ -3,12 +3,12 @@ import VueRouter from 'vue-router'
 
 import MainContent from '../components/layout/MainContent.vue'
 
-import Home from '../components/views/Home'
-import Domain from '../components/views/Domain'
-import DomainOverview from '../components/views/domain/DomainOverview'
-import Me from '../components/views/Me'
-import DomainManage from "../components/views/domain/DomainManage";
-import DomainDetail from "../components/views/domain/detail/DomainDetail";
+import Home from '../views/Home'
+import Domain from '../views/Domain'
+import DomainOverview from '../views/domain/DomainOverview'
+import Me from '../views/Me'
+import DomainManage from "../views/domain/manage/DomainManage";
+import DomainDetail from "../views/domain/detail/DomainDetail";
 
 Vue.use(VueRouter);
 
