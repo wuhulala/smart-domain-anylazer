@@ -1,8 +1,19 @@
 <template>
     <div>
-        <a-row>
+        <a-row :gutter="[40,48]">
             <a-col :span="4">
-                <a-button @click="showAddGroupModal">添加分组</a-button>
+                <a-row>
+                    <a-col :span="16" >
+                        <span>当前选中:
+                            <a-tag @close="resetCurGroup">{{curGroup.groupName}}</a-tag>
+                            <a-icon type="close"  @click="resetCurGroup" />
+                        </span>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-button icon="plus" style="float: right" size="small" @click="showAddGroupModal"></a-button>
+                    </a-col>
+                </a-row>
+                <hr/>
                 <a-input-search style="margin-bottom: 8px" placeholder="Search" @change="filterGroup" />
                 <a-tree :loadData="onLoadData"
                         @select="switchGroup"
@@ -31,6 +42,9 @@
                 </a-form-model>
 
                 <a-table :columns="columns" :dataSource="domainData">
+                    <span slot="name" slot-scope="name, record">
+                       <a @click="goDetail(record.id)">{{name}}</a>
+                    </span>
                     <span slot="tags" slot-scope="tags">
                         <a-tag
                                 v-for="tag in tags"
@@ -43,7 +57,7 @@
                         <a href="javascript:;">更新</a>
                         <a-divider type="vertical"/>
                         <a href="javascript:;">删除</a>
-                </span>
+                    </span>
                 </a-table>
             </a-col>
         </a-row>
@@ -80,13 +94,11 @@
             title: '创建人',
             slots: {title: 'customTitle'},
             dataIndex: 'creator',
-            scopedSlots: {customRender: 'name'},
         },
         {
             title: "创建时间",
             dataIndex: 'gmtCreate',
             slots: {title: 'customTitle'},
-            scopedSlots: {customRender: 'gmtCreate'},
         },
         {
             title: '操作',
@@ -172,6 +184,13 @@
                 this.expandedKeys = expandedKeys;
                 this.autoExpandParent = false;
             },
+            resetCurGroup() {
+                this.curGroup = {
+                    id: "-1",
+                    groupName: "默认"
+                }
+                this.curGroupNode = null;
+            },
             filterGroup(e) {
                 debugger
                 const value = e.target.value;
@@ -193,10 +212,10 @@
             },
             onLoadData(treeNode) {
                 return new Promise(resolve => {
-                    if (treeNode.dataRef.children) {
-                        resolve();
-                        return;
-                    }
+                    // if (treeNode.dataRef.children) {
+                    //     resolve();
+                    //     return;
+                    // }
                     DomainService.findGroupByParentId(treeNode.dataRef.key,  (result) => {
                         treeNode.dataRef.children = Array.from(result.list, (group) => {
                             return {
@@ -219,7 +238,11 @@
             },
             afterAddGroupSuccess(group) {
                 if (this.curGroupNode) {
-                    this.curGroupNode.children.push(this.transGroup(group))
+                    // if (!this.curGroupNode.children) {
+                    //     this.curGroupNode.children = [];
+                    // }
+                    // this.curGroupNode.children.push(this.transGroup(group))
+                    this.onLoadData(this.curGroupNode);
                 } else {
                     this.groupData.push(this.transGroup(group));
                 }
@@ -249,6 +272,8 @@
                     _meta: group
                 }
             },
+
+
             submitAddForm(formName) {
                 this.$refs[formName].validate(valid => {
                     if (valid) {
@@ -261,6 +286,7 @@
                         DomainService.addDomain(domain, (result) => {
                             this.refreshDomainList()
                             this.$message.info('新增成功');
+                            this.addForm = {};
                         })
                     } else {
                         this.$message.warn('新增失败');
@@ -276,6 +302,9 @@
                 DomainService.findDomainByGroupId(groupId, function (result) {
                     that.domainData = [...result.list];
                 })
+            },
+            goDetail(id) {
+                this.$router.push({name: 'DomainDetail', params: {id : id}})
             }
         },
     };
