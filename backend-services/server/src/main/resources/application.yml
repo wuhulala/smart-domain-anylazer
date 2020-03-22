@@ -13,6 +13,8 @@ management:
         include: "*"
 
 spring:
+  jackson:
+    time-zone: GMT+8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url:  jdbc:mysql://192.168.1.101:3306/domain?useUnicode=true&characterEncoding=utf-8&useSSL=false
