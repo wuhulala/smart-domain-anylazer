@@ -43,7 +43,7 @@
 
                 <a-table :columns="columns" :dataSource="domainData">
                     <span slot="name" slot-scope="name, record">
-                       <a @click="goDetail(record.id)">{{name}}</a>
+                       <router-link target="_blank" :to="{name: 'DomainDetailManage', params: {id: record.id}}" >{{name}}</router-link>
                     </span>
                     <span slot="tags" slot-scope="tags">
                         <a-tag
@@ -304,7 +304,7 @@
                 })
             },
             goDetail(id) {
-                this.$router.push({name: 'DomainDetail', params: {id : id}})
+                this.$router.push({name: 'DomainManageDetail', params: {id : id}})
             }
         },
     };

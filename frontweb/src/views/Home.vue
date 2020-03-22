@@ -34,6 +34,8 @@
         padding: 10px 20px;
     }
 
+
+
     .home-content h3 {
         border-left: 3px #52a1de solid;
         padding-left: 10px;
@@ -42,6 +44,10 @@
 
     .rank-content-box {
         margin-top: 20px;
+    }
+
+    .ant-col {
+        padding: 15px;
     }
 
 </style>
@@ -65,7 +71,7 @@
             <div><h3>知识串联</h3></div>
         </a-carousel>
 
-        <a-row :gutter="[40,0]" class="home-content">
+        <a-row  class="home-content">
             <a-col :span="16">
                 <h3>领域总览</h3>
                 <div
@@ -80,14 +86,36 @@
             <a-col :span="8" class="rank-content">
                 <div class="rank-content-box">
                     <h3>最新</h3>
-                    <a-list bordered :dataSource="data">
-                        <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+                    <a-list bordered :dataSource="least5Data">
+                        <a-list-item slot="renderItem" slot-scope="item, index">
+                            <a-list-item-meta
+                                    :description="item.creator"
+                            >
+                                <router-link slot="title" target="_blank" :to="{ name: 'DomainDetail', params: { id: item.id }}">
+                                    {{item.name}}
+                                </router-link>
+                                <a-avatar shape="square" slot="avatar" size="large" :style="{background: randomColor(), verticalAlign: 'middle'}">
+                                    {{item.name}}
+                                </a-avatar>
+                            </a-list-item-meta>
+                        </a-list-item>
                     </a-list>
                 </div>
                 <div class="rank-content-box">
                     <h3>待复习</h3>
-                    <a-list bordered :dataSource="data">
-                        <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+                    <a-list bordered :dataSource="reviewData">
+                        <a-list-item slot="renderItem" slot-scope="item, index">
+                            <a-list-item-meta
+                                    :description="item.creator"
+                            >
+                                <router-link slot="title" target="_blank" :to="{ name: 'DomainDetail', params: { id: item.id }}">
+                                    {{item.name}}
+                                </router-link>
+                                <a-avatar shape="square" slot="avatar" size="large" :style="{background: randomColor(), verticalAlign: 'middle'}">
+                                    {{item.name}}
+                                </a-avatar>
+                            </a-list-item-meta>
+                        </a-list-item>
                     </a-list>
                 </div>
             </a-col>
@@ -102,6 +130,8 @@
     import reqwest from 'reqwest';
     import infiniteScroll from 'vue-infinite-scroll';
     import DomainOverview from "./domain/DomainOverview";
+    import DomainService from "../api/domain/DomainService";
+    import Domain from "./Domain";
     const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
     export default {
@@ -117,6 +147,14 @@
                     'Man charged over missing wedding girl.',
                     'Los Angeles battles huge wildfires.',
                 ],
+                reviewData: [
+                    'Racing car sprays burning fuel into crowd.',
+                    'Japanese princess to wed commoner.',
+                    'Australian walks 100km after outback crash.',
+                    'Man charged over missing wedding girl.',
+                    'Los Angeles battles huge wildfires.',
+                ],
+                least5Data:[],
                 data2: [],
                 loading: false,
                 busy: false,
@@ -126,6 +164,8 @@
             this.fetchData(res => {
                 this.data2 = res.results;
             });
+            this.initLeast5Domain();
+            this.initReview5Domain();
         },
         mounted() {
 
@@ -143,19 +183,25 @@
                 });
             },
             handleInfiniteOnLoad() {
-                const data = this.data2;
-                this.loading = true;
-                if (data.length > 14) {
-                    this.$message.warning('Infinite List loaded all');
-                    this.busy = true;
-                    this.loading = false;
-                    return;
-                }
-                this.fetchData(res => {
-                    this.data2 = data.concat(res.results);
-                    this.loading = false;
-                });
+                // TODO 加载 domaingroup + domainpreview
             },
+            initLeast5Domain() {
+                DomainService.findLeast5Domain((result) => {
+                    this.least5Data = result.list;
+                })
+            },
+            initReview5Domain() {
+                DomainService.findReview5Domain((result) => {
+                    this.reviewData = result.list;
+                })
+            },
+            randomColor() {
+                let r = parseInt(Math.random() * 256)
+                let g = parseInt(Math.random() * 256)
+                let b = parseInt(Math.random() * 256)
+
+                return `rgba(${r},${g},${b},0.8)`
+            }
         }
     }
 </script>

@@ -1,0 +1,641 @@
+<style scoped>
+    .domain-overview-panel {
+        padding: 20px;
+    }
+
+    .domain-overview-panel h2 {
+        font-weight: bolder;
+        padding-bottom: 20px;
+        border-bottom: 2px #f3f3f3 solid;
+    }
+
+    .domain-overview-panel .summary {
+
+    }
+
+    .domain-overview-panel .architecture-diagram {
+
+    }
+
+
+    .domain-overview-panel .architecture-diagram img {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .domain-detail-panel {
+        padding: 20px;
+        min-height: 500px;
+    }
+
+    .domain-detail-panel h3 {
+        font-weight: bolder;
+        padding-bottom: 20px;
+        border-bottom: 1px #f3f3f3 solid;
+    }
+
+    #components-back-top-demo-custom .ant-back-top {
+        bottom: 100px;
+    }
+    #components-back-top-demo-custom .ant-back-top-inner {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        background-color: #1088e9;
+        color: #fff;
+        text-align: center;
+        font-size: 20px;
+    }
+</style>
+<template>
+
+    <div style="padding-right: 200px">
+        <div id="overview" class="domain-overview-panel">
+            <h2>{{domainDetail.title}}<span v-if="domainDetail.subTitle">-</span>
+                <small>
+                    {{domainDetail.subTitle}}
+                </small>
+            </h2>
+            <p class="summary">
+                {{domainDetail.summary}}
+            </p>
+            <p class="architecture-diagram">
+                <img :src="domainDetail.architecture"/>
+            </p>
+
+        </div>
+        <div id="detail-1" class="domain-detail-panel">
+            <h3>特点</h3>
+            <!--、功能-->
+            <div class="feature">
+                <a-row :gutter="16">
+                    <a-col :span="8" v-for="feature in domainDetail.features" :key="feature">
+                        <a-card :title="feature.title" :bordered="false">
+                            <ul>
+                                <li v-for="desc in feature.detail">{{desc}}</li>
+                            </ul>
+                        </a-card>
+                    </a-col>
+
+                </a-row>
+            </div>
+        </div>
+        <div id="detail-2" class="domain-detail-panel">
+            <h3>产生背景</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <div id="detail-3" class="domain-detail-panel">
+            <h3>发展历程</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <div class="domain-detail-panel">
+            <h3>热词分析</h3>
+            <a-row>
+                <a-col :span="8">
+                    <a-card title="Flink 标题热词分析" :bordered="false" style="width: 600px">
+                        <div id="myChart" :style="{width: '600px', height: '300px'}"></div>
+                    </a-card>
+                </a-col>
+                <a-col :span="8">
+                    <a-card title="Flink 文章热词分析" :bordered="false" style="width: 600px">
+                        <div id="myChart2" :style="{width: '600px', height: '300px'}"></div>
+                    </a-card>
+                </a-col>
+            </a-row>
+        </div>
+        <div class="domain-detail-panel">
+            <h3>解决的问题</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <div class="domain-detail-panel">
+            <h3>产生的问题</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <div class="domain-detail-panel">
+            <h3>应用场景</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <div class="domain-detail-panel">
+            <h3>详情</h3>
+            <a-row :gutter="16">
+
+            </a-row>
+        </div>
+        <a-anchor showInkInFixed="true" @click="handleClick"
+                  style="position: fixed;top: 100px;right: 100px;width: 150px;">
+            <a-anchor-link href="overview" title="总览"/>
+            <a-anchor-link href="detail-1" title="特点"/>
+            <a-anchor-link href="detail-2" title="产生背景"/>
+            <a-anchor-link href="detail-3" title="发展历程"/>
+            <a-anchor-link href="#components-anchor-demo-static" title="热词分析"/>
+            <a-anchor-link href="#components-anchor-demo-static" title="解决的问题"/>
+            <a-anchor-link href="#components-anchor-demo-static" title="产生的问题"/>
+            <a-anchor-link href="#components-anchor-demo-static" title="应用场景"/>
+            <a-anchor-link href="#components-anchor-demo-static" title="详情"/>
+            <a-anchor-link href="back" >
+                <p slot="title"><a-icon type="rollback" />&nbsp; &nbsp;返回</p>
+            </a-anchor-link>
+        </a-anchor>
+        <div>
+            <a-affix >
+                <a-button type="primary">返回</a-button>
+            </a-affix>
+        </div>
+
+    </div>
+</template>
+
+
+<script>
+    export default {
+        name: "DomainDetail",
+        data() {
+            return {
+                msg: 'Welcome to Your Vue.js App',
+                top: 10,
+                bottom: 10,
+                domainDetail: {}
+            }
+        },
+        created() {
+            this.domainDetail = {
+                "title": "Flink",
+                "subTitle": "数据流上的有状态计算",
+                "summary": "Apache Flink 是一个分布式大数据处理引擎，可对有限数据流和无限数据流进行有状态或无状态的计算，能够部署在各种集群环境，对各种规模大小的数据进行快速计算。\n",
+                "architecture": "https://flink.apache.org/img/flink-home-graphic.png",
+                "features": [
+                    {
+                        "title": "所有流式场景",
+                        "icon": "",
+                        "detail": [
+                            "事件驱动应用",
+                            "流批分析",
+                            "数据管道 & ETL"
+                        ]
+                    },
+                    {
+                        "title": "正确性保证",
+                        "icon": "",
+                        "detail": [
+                            "Exactly-once 状态一致性",
+                            "事件时间处理",
+                            "成熟的迟到数据处理"
+                        ]
+                    },
+                    {
+                        "title": "分层 API",
+                        "icon": "",
+                        "detail": [
+                            "SQL on Stream & Batch Data",
+                            "DataStream API & DataSet API",
+                            "ProcessFunction (Time & State)"
+                        ]
+                    },
+                    {
+                        "title": " 聚焦运维",
+                        "icon": "",
+                        "detail": [
+                            "灵活部署",
+                            "高可用",
+                            "保存点"
+                        ]
+                    },
+                    {
+                        "title": "大规模计算",
+                        "icon": "",
+                        "detail": [
+                            "水平扩展架构",
+                            "支持超大状态",
+                            "增量检查点机制"
+                        ]
+                    },
+                    {
+                        "title": " 性能卓越",
+                        "icon": "",
+                        "detail": [
+                            "低延迟",
+                            "高吞吐",
+                            "内存计算"
+                        ]
+                    }
+                ]
+            }
+        },
+        mounted() {
+            this.drawLine();
+        },
+        methods: {
+            handleClick(e, link) {
+                e.preventDefault();
+                if (link.href === 'back') {
+                    debugger
+                    this.$router.go(-1)
+                }
+                // 找到锚点
+                let anchorElement = document.getElementById(link.href);
+                // 如果对应id的锚点存在，就跳转到锚点
+                if (anchorElement) {
+                    anchorElement.scrollIntoView();
+                }
+            },
+            drawLine() {
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = this.$echarts.init(document.getElementById('myChart'))
+                let myChart2 = this.$echarts.init(document.getElementById('myChart2'))
+                // 绘制图表
+                let option = {
+                    title: {
+                        link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+                        x: 'center',
+                        textStyle: {
+                            fontSize: 23
+                        }
+
+                    },
+                    backgroundColor: '#F7F7F7',
+                    tooltip: {
+                        show: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {
+                                iconStyle: {
+                                    normal: {
+                                        color: '#FFFFFF'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'wordCloud',
+
+                        // The shape of the "cloud" to draw. Can be any polar equation represented as a
+                        // callback function, or a keyword present. Available presents are circle (default),
+                        // cardioid (apple or heart shape curve, the most known polar equation), diamond (
+                        // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
+
+                        shape: 'circle',
+
+                        // A silhouette image which the white area will be excluded from drawing texts.
+                        // The shape option will continue to apply as the shape of the cloud to grow.
+
+
+                        // Folllowing left/top/width/height/right/bottom are used for positioning the word cloud
+                        // Default to be put in the center and has 75% x 80% size.
+
+                        left: 'center',
+                        top: 'center',
+                        width: '70%',
+                        height: '80%',
+                        right: null,
+                        bottom: null,
+
+                        // Text size range which the value in data will be mapped to.
+                        // Default to have minimum 12px and maximum 60px size.
+
+                        sizeRange: [20, 90],
+
+                        // Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
+
+                        rotationRange: [-90, 90],
+                        rotationStep: 45,
+
+                        // size of the grid in pixels for marking the availability of the canvas
+                        // the larger the grid size, the bigger the gap between words.
+
+                        gridSize: 8,
+
+                        // set to true to allow word being draw partly outside of the canvas.
+                        // Allow word bigger than the size of the canvas to be drawn
+                        drawOutOfBound: false,
+
+                        // Global text style
+                        textStyle: {
+                            normal: {
+                                fontFamily: 'sans-serif',
+                                // Color can be a callback function or a color string
+                                color: function () {
+                                    // Random color
+                                    var colors = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];
+                                    var result = colors[parseInt(Math.random() * 10)];
+                                    console.log(result)
+                                    return result;
+                                }
+                            },
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+
+                    }]
+                };
+                let option2 = {
+                    title: {
+                        link: 'https://www.baidu.com/s?wd=' + encodeURIComponent('ECharts'),
+                        x: 'center',
+                        textStyle: {
+                            fontSize: 23
+                        }
+
+                    },
+                    backgroundColor: '#F7F7F7',
+                    tooltip: {
+                        show: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {
+                                iconStyle: {
+                                    normal: {
+                                        color: '#FFFFFF'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'wordCloud',
+
+                        // The shape of the "cloud" to draw. Can be any polar equation represented as a
+                        // callback function, or a keyword present. Available presents are circle (default),
+                        // cardioid (apple or heart shape curve, the most known polar equation), diamond (
+                        // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
+
+                        shape: 'circle',
+
+                        // A silhouette image which the white area will be excluded from drawing texts.
+                        // The shape option will continue to apply as the shape of the cloud to grow.
+
+
+                        // Folllowing left/top/width/height/right/bottom are used for positioning the word cloud
+                        // Default to be put in the center and has 75% x 80% size.
+
+                        left: 'center',
+                        top: 'center',
+                        width: '70%',
+                        height: '80%',
+                        right: null,
+                        bottom: null,
+
+                        // Text size range which the value in data will be mapped to.
+                        // Default to have minimum 12px and maximum 60px size.
+
+                        sizeRange: [20, 90],
+
+                        // Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
+
+                        rotationRange: [-90, 90],
+                        rotationStep: 45,
+
+                        // size of the grid in pixels for marking the availability of the canvas
+                        // the larger the grid size, the bigger the gap between words.
+
+                        gridSize: 8,
+
+                        // set to true to allow word being draw partly outside of the canvas.
+                        // Allow word bigger than the size of the canvas to be drawn
+                        drawOutOfBound: false,
+
+                        // Global text style
+                        textStyle: {
+                            normal: {
+                                fontFamily: 'sans-serif',
+                                // Color can be a callback function or a color string
+                                color: function () {
+                                    // Random color
+                                    var colors = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];
+                                    var result = colors[parseInt(Math.random() * 10)];
+                                    console.log(result)
+                                    return result;
+                                }
+                            },
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+
+                    }]
+                };
+
+                option2.series[0].data = [{"name": "Flink", "value": 5006}, {
+                    "name": "数据",
+                    "value": 3689
+                }, {"name": "状态", "value": 1541}, {"name": "-", "value": 1114}, {
+                    "name": "实时",
+                    "value": 962
+                }, {"name": "Apache", "value": 895}, {"name": "用户", "value": 867}, {
+                    "name": "时间",
+                    "value": 835
+                }, {"name": "API", "value": 813}, {"name": "SQL", "value": 761}, {
+                    "name": "时",
+                    "value": 709
+                }, {"name": "flink", "value": 707}, {"name": "表", "value": 645}, {
+                    "name": "模式",
+                    "value": 635
+                }, {"name": "资源", "value": 597}, {"name": "结果", "value": 590}, {
+                    "name": "问题",
+                    "value": 587
+                }, {"name": "org", "value": 584}, {"name": "apache", "value": 584}, {
+                    "name": "系统",
+                    "value": 567
+                }, {"name": "引擎", "value": 558}, {"name": "场景", "value": 555}, {
+                    "name": "Checkpoint",
+                    "value": 555
+                }, {"name": "图", "value": 546}, {"name": "阿里巴巴", "value": 523}, {
+                    "name": "信息",
+                    "value": 517
+                }, {"name": "性能", "value": 514}, {"name": "内存", "value": 509}, {
+                    "name": "Table",
+                    "value": 508
+                }, {"name": "平台", "value": 488}, {"name": "方式", "value": 488}, {
+                    "name": "任务",
+                    "value": 470
+                }, {"name": "架构", "value": 466}, {"name": "事件", "value": 463}, {
+                    "name": "类型",
+                    "value": 456
+                }, {"name": "方法", "value": 444}, {"name": "算子", "value": 444}, {
+                    "name": "功能",
+                    "value": 430
+                }, {"name": "checkpoint", "value": 430}, {"name": "技术", "value": 422}, {
+                    "name": "版本",
+                    "value": 420
+                }, {"name": "机制", "value": 411}, {"name": "Kafka", "value": 411}, {
+                    "name": "情况",
+                    "value": 407
+                }, {"name": "社区", "value": 406}, {"name": "时候", "value": 400}, {
+                    "name": "Hive",
+                    "value": 393
+                }, {"name": "逻辑", "value": 363}, {"name": "机器", "value": 355}, {
+                    "name": "Spark",
+                    "value": 355
+                }, {"name": "Python", "value": 350}, {"name": "State", "value": 345}, {
+                    "name": "Task",
+                    "value": 343
+                }, {"name": "定义", "value": 343}, {"name": "文件", "value": 342}, {
+                    "name": "代码",
+                    "value": 328
+                }, {"name": "TaskManager", "value": 320}, {"name": "barrier", "value": 320}, {
+                    "name": "PPT",
+                    "value": 312
+                }, {"name": "节点", "value": 308}, {"name": "快照", "value": 302}, {
+                    "name": "业务",
+                    "value": 293
+                }, {"name": "state", "value": 279}, {"name": "网络", "value": 278}, {
+                    "name": "语义",
+                    "value": 275
+                }, {"name": "Job", "value": 275}, {"name": "环境", "value": 274}, {
+                    "name": "文章",
+                    "value": 269
+                }, {"name": "数据库", "value": 266}, {"name": "过程", "value": 263}, {
+                    "name": "JobManager",
+                    "value": 262
+                }, {"name": "INFO", "value": 262}, {"name": "源", "value": 262}, {
+                    "name": "Join",
+                    "value": 254
+                }, {"name": "DataStream", "value": 253}, {"name": "Time", "value": 246}, {
+                    "name": "Blink",
+                    "value": 243
+                }, {"name": "消息", "value": 243}, {"name": "Yarn", "value": 242}, {
+                    "name": "the",
+                    "value": 240
+                }, {"name": "Buffer", "value": 238}, {"name": "性", "value": 232}, {
+                    "name": "专家",
+                    "value": 229
+                }, {"name": "作者", "value": 229}, {"name": "buffer", "value": 220}, {
+                    "name": "a",
+                    "value": 219
+                }, {"name": "需求", "value": 218}, {"name": "to", "value": 218}, {
+                    "name": "框架",
+                    "value": 217
+                }, {"name": "项目", "value": 217}, {"name": "部分", "value": 217}, {
+                    "name": "方面",
+                    "value": 217
+                }, {"name": "数据流", "value": 215}, {"name": "b", "value": 212}, {
+                    "name": "流式",
+                    "value": 210
+                }, {"name": "阶段", "value": 210}, {"name": "Java", "value": 208}, {
+                    "name": "实例",
+                    "value": 208
+                }, {"name": "Operator", "value": 206}, {"name": "partition", "value": 206}];
+
+                option.series[0].data = [{"name": "Flink", "value": 176}, {
+                    "name": "Apache",
+                    "value": 115
+                }, {"name": "China", "value": 38}, {"name": "Meetup", "value": 28}, {
+                    "name": "教程",
+                    "value": 26
+                }, {"name": "S", "value": 24}, {"name": "基础", "value": 21}, {
+                    "name": "阶",
+                    "value": 16
+                }, {"name": "Forward", "value": 14}, {"name": "SQL", "value": 13}, {
+                    "name": "状态",
+                    "value": 12
+                }, {"name": "API", "value": 11}, {"name": "实战", "value": 11}, {
+                    "name": "分会场",
+                    "value": 10
+                }, {"name": "原理", "value": 10}, {"name": "北京站", "value": 10}, {
+                    "name": "机制",
+                    "value": 10
+                }, {"name": "Kafka", "value": 9}, {"name": "Once", "value": 8}, {
+                    "name": "上海",
+                    "value": 8
+                }, {"name": "实时", "value": 8}, {"name": "引擎", "value": 8}, {
+                    "name": "&",
+                    "value": 7
+                }, {"name": "Checkpoint", "value": 6}, {"name": "深圳", "value": 6}, {
+                    "name": "性能",
+                    "value": 6
+                }, {"name": "Exactly", "value": 6}, {"name": "流式", "value": 6}, {
+                    "name": "-",
+                    "value": 6
+                }, {"name": "深度", "value": 6}, {"name": "数据", "value": 6}, {"name": "应用程序", "value": 5}, {
+                    "name": "指南",
+                    "value": 4
+                }, {"name": "Spark", "value": 4}, {"name": "Table", "value": 4}, {
+                    "name": "Hive",
+                    "value": 4
+                }, {"name": "State", "value": 4}, {"name": "Connector", "value": 4}, {
+                    "name": "DataStream",
+                    "value": 4
+                }, {"name": "Kubernetes", "value": 4}, {"name": "on", "value": 4}, {
+                    "name": "Blink",
+                    "value": 4
+                }, {"name": "文", "value": 4}, {"name": "Python", "value": 3}, {
+                    "name": "特性",
+                    "value": 3
+                }, {"name": "Time", "value": 3}, {"name": "机遇", "value": 2}, {"name": "生态所", "value": 2}, {
+                    "name": "AI",
+                    "value": 2
+                }, {"name": "框架", "value": 2}, {"name": "s", "value": 2}, {
+                    "name": "贡献",
+                    "value": 2
+                }, {"name": "Prometheus", "value": 2}, {"name": "数仓", "value": 2}, {
+                    "name": "YARN",
+                    "value": 2
+                }, {"name": "问题", "value": 2}, {"name": "内存", "value": 2}, {"name": "主", "value": 2}, {
+                    "name": "子书",
+                    "value": 2
+                }, {"name": "Join", "value": 2}, {"name": "场景", "value": 2}, {
+                    "name": "类型",
+                    "value": 2
+                }, {"name": "Natively", "value": 2}, {"name": "表", "value": 2}, {
+                    "name": "生态",
+                    "value": 2
+                }, {"name": "白成长", "value": 2}, {"name": "运维", "value": 2}, {"name": "杭州", "value": 2}, {
+                    "name": "栈",
+                    "value": 2
+                }, {"name": "模式", "value": 2}, {"name": "电", "value": 2}, {"name": "大小", "value": 2}, {
+                    "name": "下一代",
+                    "value": 2
+                }, {"name": "Least", "value": 2}, {"name": "源泉", "value": 2}, {
+                    "name": "Storm",
+                    "value": 2
+                }, {"name": "业务", "value": 2}, {"name": "年度", "value": 2}, {"name": "社区", "value": 2}, {
+                    "name": "At",
+                    "value": 2
+                }, {"name": "核心技术", "value": 2}, {"name": "商品", "value": 2}, {
+                    "name": "Batch",
+                    "value": 2
+                }, {"name": "实战篇", "value": 2}, {"name": "网络", "value": 2}, {"name": "Yarn", "value": 2}, {
+                    "name": "环境",
+                    "value": 2
+                }, {"name": "VS", "value": 2}, {"name": "概念", "value": 2}, {
+                    "name": "Metrics",
+                    "value": 2
+                }, {"name": "云", "value": 2}, {"name": "源", "value": 2}, {"name": "方面", "value": 2}, {
+                    "name": "Shuffle",
+                    "value": 2
+                }, {"name": "Native", "value": 2}, {"name": "Deploy", "value": 2}, {
+                    "name": "K",
+                    "value": 2
+                }, {"name": "PyFlink", "value": 2}, {"name": "CEP", "value": 2}, {"name": "概览", "value": 2}];
+
+                myChart.setOption(option);
+                myChart2.setOption(option2);
+                myChart.on('click', function (params) {
+                    //alert((params.name));
+                    window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+
+                });
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

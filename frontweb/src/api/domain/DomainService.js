@@ -82,5 +82,23 @@ export default {
         }).catch(err => {
             console.log(err)
         })
+    },
+    findLeast5Domain: function (callback) {
+        let params = {
+        };
+        https.fetchPost('/domain/least5.json', params).then((result) => {
+            callback(result.data);
+        }).catch(err => {
+            console.log(err)
+        })
+    },
+    findReview5Domain: function (callback) {
+        let params = {
+        };
+        https.fetchPost('/domain/review5.json', params).then((result) => {
+            callback(result.data);
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

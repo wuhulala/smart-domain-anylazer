@@ -9,6 +9,7 @@ import DomainOverview from '../views/domain/DomainOverview'
 import Me from '../views/Me'
 import DomainManage from "../views/domain/manage/DomainManage";
 import DomainDetail from "../views/domain/detail/DomainDetail";
+import DomainDetailManage from "../views/domain/detail/DomainDetailManage";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,12 @@ const routes = [
             path: 'manage',
             breadcrumbName: '领域管理',
             component: DomainManage
+          },
+          {
+            name: 'DomainDetailManage',
+            path: 'managedetail/:id',
+            breadcrumbName: '领域详情',
+            component: DomainDetailManage
           },
           {
             name: 'DomainDetail',
