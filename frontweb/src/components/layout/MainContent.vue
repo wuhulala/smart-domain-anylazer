@@ -14,15 +14,15 @@
                     <router-link to="/">主页</router-link>
                 </a-menu-item>
                 <a-menu-item key="2">
-                    <router-link to="/domain">领域管理</router-link>
+                    <router-link to="/domain/manage">领域管理</router-link>
                 </a-menu-item>
                 <a-menu-item key="3">
                     <router-link to="/me">个人信息</router-link>
                 </a-menu-item>
             </a-menu>
         </a-layout-header>
-        <a-layout-content style="padding: 0 50px">
-            <a-breadcrumb :routes="routes" style="margin: 16px 0">
+        <a-layout-content >
+            <!--<a-breadcrumb :routes="routes" style="margin: 16px 0">
                 <template slot="itemRender" slot-scope="{route, params, routes, paths}">
                     <span v-if="routes.indexOf(route) === routes.length - 1">
                         {{route.breadcrumbName}}
@@ -31,8 +31,8 @@
                         {{route.breadcrumbName}}
                     </router-link>
                 </template>
-            </a-breadcrumb>
-            <div :style="{ background: '#fff', padding: '24px', minHeight: 'calc( 680px )' }">
+            </a-breadcrumb>-->
+            <div :style="{ background: '#fff',  minHeight: 'calc( 680px )' }">
                 <router-view></router-view>
             </div>
         </a-layout-content>

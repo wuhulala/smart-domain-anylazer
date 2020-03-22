@@ -10,9 +10,9 @@
                 <a-sub-menu key="sub1">
                     <span slot="title">
                         <a-icon type="user"/>领域元数据</span>
-                    <a-menu-item key="0">
+                 <!--   <a-menu-item key="0">
                         <router-link to="/domain">领域概览</router-link>
-                    </a-menu-item>
+                    </a-menu-item>-->
                     <a-menu-item key="1">
                         <router-link to="/domain/manage">领域管理</router-link>
                     </a-menu-item>
