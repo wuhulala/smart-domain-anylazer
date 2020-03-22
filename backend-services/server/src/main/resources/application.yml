@@ -5,8 +5,9 @@ rest:
   service:
     scan:
       path: com.wuhulala.sda.service
+    entrance:
+      path: api
 
-management:
   endpoints:
     web:
       exposure:
@@ -27,3 +28,5 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+logging:
+  config: classpath:log4j2.xml
