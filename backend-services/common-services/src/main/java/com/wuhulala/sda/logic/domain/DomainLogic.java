@@ -62,4 +62,14 @@ public class DomainLogic {
         Wrapper<Domain> wrapper = Wrappers.<Domain>lambdaQuery().eq(Domain::getGroupId, groupId);
         return domainMapper.selectList(wrapper);
     }
+
+    public List<Domain> findLeastDomain(int limit) {
+        Wrapper<Domain> wrapper = Wrappers.<Domain>lambdaQuery().orderByDesc(Domain::getGmtCreate).last("limit " + limit);
+        return domainMapper.selectList(wrapper);
+    }
+
+    public List<Domain> findReviewDomain(int limit) {
+        Wrapper<Domain> wrapper = Wrappers.<Domain>lambdaQuery().last("limit " + limit);
+        return domainMapper.selectList(wrapper);
+    }
 }

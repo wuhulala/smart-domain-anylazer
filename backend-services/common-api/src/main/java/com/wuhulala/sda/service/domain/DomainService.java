@@ -33,4 +33,14 @@ public interface DomainService {
 
     @RestService(name="删除领域",path = "delete")
     DomainResp deleteDomain(DomainReq req);
+
+    ///////////////////////////////////////
+
+    @RestService(name="获取最新的5条Domain",path = "/least5")
+    DomainResp findLeast5Domain(DomainReq req);
+
+    @RestService(name="获取应该复习的Domain",path = "/review5")
+    DomainResp findReview5Domain(DomainReq req);
+
+
 }
