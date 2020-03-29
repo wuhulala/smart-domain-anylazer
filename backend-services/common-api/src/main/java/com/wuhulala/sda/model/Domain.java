@@ -25,23 +25,18 @@ public class Domain {
 
     private String groupId;
 
-//    /**图标*/
-//    private String icon;
-//
-//    /**简介*/
-//    private String desc;
-//
-//    /**子标题*/
-//    private String subTitle;
-//
-//    /**主体架构图*/
-//    private String arc;
-//
-//    /**思维导图*/
+    /**图标*/
+    private String icon;
 
 
+    /**子标题， 不超过50字*/
+    private String subTitle;
+
+    /**简介,*/
+    private String description;
 
 
-
+    /**主体架构图*/
+    private String ag;
 
 }
