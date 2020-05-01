@@ -100,5 +100,14 @@ export default {
         }).catch(err => {
             console.log(err)
         })
+    },
+    findDomainTree: function (callback) {
+        let params = {
+        };
+        https.fetchPost('/domain/domain_tree.json', params).then((result) => {
+            callback(result.data);
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

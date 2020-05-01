@@ -1,9 +1,6 @@
 package com.wuhulala.sda.service.domain;
 
-import com.wuhulala.sda.dto.DomainGroupReq;
-import com.wuhulala.sda.dto.DomainGroupResp;
-import com.wuhulala.sda.dto.DomainReq;
-import com.wuhulala.sda.dto.DomainResp;
+import com.wuhulala.sda.dto.*;
 import com.wuhulala.sda.logic.domain.DomainLogic;
 import com.wuhulala.sda.model.Domain;
 import com.wuhulala.sda.model.DomainGroup;
@@ -113,6 +110,13 @@ public class DomainServiceImpl implements DomainService {
         List<Domain> list = domainLogic.findReviewDomain(5);
         DomainResp resp = new DomainResp();
         resp.setList(list);
+        return resp;
+    }
+
+    @Override
+    public DomainTreeResp findAllDomainWithTree(DomainReq req) {
+        DomainTreeResp resp = new DomainTreeResp();
+        resp.setTree(domainLogic.buildDomainTree());
         return resp;
     }
 }

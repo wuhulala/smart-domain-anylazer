@@ -2,10 +2,7 @@ package com.wuhulala.sda.service.domain;
 
 import com.wuhulala.rest.base.annotation.RestService;
 import com.wuhulala.rest.base.annotation.RestServiceModule;
-import com.wuhulala.sda.dto.DomainGroupReq;
-import com.wuhulala.sda.dto.DomainGroupResp;
-import com.wuhulala.sda.dto.DomainReq;
-import com.wuhulala.sda.dto.DomainResp;
+import com.wuhulala.sda.dto.*;
 
 @RestServiceModule("/domain")
 public interface DomainService {
@@ -42,5 +39,9 @@ public interface DomainService {
     @RestService(name="获取应该复习的Domain",path = "/review5")
     DomainResp findReview5Domain(DomainReq req);
 
+    ///////////////////////////////////////
+
+    @RestService(name="获取所有领域的视图",path = "/domain_tree")
+    DomainTreeResp findAllDomainWithTree(DomainReq req);
 
 }

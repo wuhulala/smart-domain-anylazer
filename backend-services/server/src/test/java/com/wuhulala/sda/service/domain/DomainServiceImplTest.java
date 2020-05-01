@@ -82,4 +82,10 @@ public class DomainServiceImplTest {
     @Test
     public void deleteDomain() {
     }
+
+    @Test
+    public void findAllDomainWithTree() {
+        System.out.println(JSON.toJSON(domainService.findAllDomainWithTree(new DomainReq())));
+
+    }
 }

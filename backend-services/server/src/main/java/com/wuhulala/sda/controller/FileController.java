@@ -1,4 +1,4 @@
-package com.hundsun.gefrm.admin.controller;
+package com.wuhulala.sda.controller;
 
 import com.wuhulala.base.dto.resp.BaseResp;
 import com.wuhulala.base.exception.BaseException;
@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
 @Controller
 public class FileController {
 
@@ -41,8 +40,8 @@ public class FileController {
     /**
      * 文件最大size 50M
      */
-    @Value("${file.max.size:1048576 * 50}")
-    private long fileMaxSize;
+    @Value("${file.max.size: 52428800}")
+    private Long fileMaxSize;
 
     /**
      * 每次上传的最大文件数量
@@ -60,7 +59,7 @@ public class FileController {
     @RequestMapping(value = {"/file/upload"},
             method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public BaseResp uploadExcel(@RequestParam(value = "file", required = true) MultipartFile srcFile) {
+    public BaseResp upload(@RequestParam(value = "file", required = true) MultipartFile srcFile) {
         BaseResp baseResp = new BaseResp();
 
         try {

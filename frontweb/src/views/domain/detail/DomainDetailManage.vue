@@ -52,17 +52,7 @@
 
     <div style="padding-right: 200px">
         <div id="overview" class="domain-overview-panel">
-            <h2>{{domainDetail.title}}<span v-if="domainDetail.subTitle">-</span>
-                <small>
-                    {{domainDetail.subTitle}}
-                </small>
-            </h2>
-            <p class="summary">
-                {{domainDetail.summary}}
-            </p>
-            <p class="architecture-diagram">
-                <img :src="domainDetail.architecture"/>
-            </p>
+            <domain-detail-manage-basic></domain-detail-manage-basic>
 
         </div>
         <div id="detail-1" class="domain-detail-panel">
@@ -158,8 +148,10 @@
 
 
 <script>
+    import DomainDetailManageBasic from "./modules/DomainDetailManageBasic";
     export default {
         name: "DomainDetail",
+        components: {DomainDetailManageBasic},
         data() {
             return {
                 msg: 'Welcome to Your Vue.js App',

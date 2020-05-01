@@ -2,15 +2,18 @@ package com.wuhulala.sda.logic.domain;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.wuhulala.sda.dto.DomainTree;
 import com.wuhulala.sda.mapper.domain.DomainGroupMapper;
 import com.wuhulala.sda.mapper.domain.DomainMapper;
 import com.wuhulala.sda.model.Domain;
 import com.wuhulala.sda.model.DomainGroup;
+import com.wuhulala.sda.util.DomainTreeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DomainLogic {
@@ -71,5 +74,19 @@ public class DomainLogic {
     public List<Domain> findReviewDomain(int limit) {
         Wrapper<Domain> wrapper = Wrappers.<Domain>lambdaQuery().last("limit " + limit);
         return domainMapper.selectList(wrapper);
+    }
+
+    public DomainTree buildDomainTree() {
+        List<DomainTree> groupNodes = domainGroupMapper.selectList(Wrappers.lambdaQuery())
+                .stream()
+                .map(group -> DomainTree.valueOf(group.getId(), group.getGroupName(), group.getParentId()))
+                .collect(Collectors.toList());
+        List<DomainTree> domainNodes = domainMapper
+                .selectList(Wrappers.lambdaQuery())
+                .stream()
+                .map(domain -> DomainTree.valueOf(domain.getId(), domain.getName(), domain.getGroupId()))
+                .collect(Collectors.toList());
+        groupNodes.addAll(domainNodes);
+        return DomainTreeUtils.buildTree(groupNodes);
     }
 }

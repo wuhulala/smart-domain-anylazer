@@ -80,6 +80,7 @@
                         :infinite-scroll-disabled="busy"
                         :infinite-scroll-distance="10"
                 >
+                    <domain-tree-overview></domain-tree-overview>
                     <domain-overview></domain-overview>
                 </div>
             </a-col>
@@ -130,13 +131,14 @@
     import reqwest from 'reqwest';
     import infiniteScroll from 'vue-infinite-scroll';
     import DomainOverview from "./domain/DomainOverview";
+    import DomainTreeOverview from "./domain/DomainTreeOverview";
     import DomainService from "../api/domain/DomainService";
     import Domain from "./Domain";
     const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
     export default {
         name: "Home",
-        components: {DomainOverview},
+        components: {DomainOverview, DomainTreeOverview},
         directives: { infiniteScroll },
         data() {
             return {

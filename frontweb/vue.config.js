@@ -60,6 +60,12 @@ module.exports = {
         /* 允许跨域 */
         changeOrigin: true,
       },
+      '/file': {
+        /* 目标代理服务器地址 */
+        target: 'http://localhost:9001/',
+        /* 允许跨域 */
+        changeOrigin: true,
+      },
     },
   },
 }

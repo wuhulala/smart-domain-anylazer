@@ -72,7 +72,7 @@
             <AppenderRef ref="runFile"/>
             <AppenderRef ref="errorFile"/>
         </Root>
-        <AsyncLogger name="org.springframework" level="info" additivity="false">
+        <AsyncLogger name="org.springframework" level="debug" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="runFile"/>
             <AppenderRef ref="errorFile"/>
