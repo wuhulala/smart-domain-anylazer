@@ -16,6 +16,9 @@
                 <a-menu-item key="2">
                     <router-link to="/domain/manage">领域管理</router-link>
                 </a-menu-item>
+                 <a-menu-item key="4">
+                     <router-link to="/code-editor">指标编辑器</router-link>
+                </a-menu-item>
                 <a-menu-item key="3">
                     <router-link to="/me">个人信息</router-link>
                 </a-menu-item>

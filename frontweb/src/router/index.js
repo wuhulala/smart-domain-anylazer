@@ -10,6 +10,7 @@ import Me from '../views/Me'
 import DomainManage from "../views/domain/manage/DomainManage";
 import DomainDetail from "../views/domain/detail/DomainDetail";
 import DomainDetailManage from "../views/domain/detail/DomainDetailManage";
+import CodeEditor from "../views/CodeEditor";
 
 Vue.use(VueRouter);
 
@@ -62,6 +63,12 @@ const routes = [
         path: '/me',
         breadcrumbName: '个人主页',
         component: Me
+      },
+      {
+        name: 'CodeEditor',
+        path: '/code-editor',
+        breadcrumbName: '指标编辑器',
+        component: CodeEditor
       }]
   }
 ];
