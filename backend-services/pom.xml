@@ -17,7 +17,7 @@
         <scala.binary.version>2.11</scala.binary.version>
 
         <revision>1.0-SNAPSHOT</revision>
-        <spring.version>5.2.2.RELEASE</spring.version>
+        <spring.version>5.2.9.RELEASE</spring.version>
         <springboot.version>2.2.2.RELEASE</springboot.version>
 
         <!-- Compiler settings properties -->
